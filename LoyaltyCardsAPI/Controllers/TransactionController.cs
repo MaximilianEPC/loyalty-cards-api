@@ -1,10 +1,9 @@
-﻿using LoyaltyCardsAPI.Entities;
+﻿using LoyaltyCardsAPI.Dtos.Transaction;
+using LoyaltyCardsAPI.Entities;
 using LoyaltyCardsAPI.Repositories.Transactions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LoyaltyCardsAPI.Controllers
@@ -33,6 +32,15 @@ namespace LoyaltyCardsAPI.Controllers
 
             var transaction = await _transactionRepository.AddAsync(cardNumber, pointsEarned);
             return Created("Create", transaction);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<LoyaltyPointsBalance>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<IEnumerable<LoyaltyPointsBalance>> GetPointsBalance()
+        {
+            var result = _transactionRepository.GetPointsBalance();
+            return Ok(result);
         }
     }
 }

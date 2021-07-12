@@ -1,4 +1,5 @@
 ﻿using LoyaltyCardsAPI.Database;
+using LoyaltyCardsAPI.Dtos.Transaction;
 using LoyaltyCardsAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -31,6 +32,16 @@ namespace LoyaltyCardsAPI.Repositories.Transactions
             await _context.Transactions.AddAsync(transaction);
             await _context.SaveChangesAsync();
             return transaction;
+        }
+
+        public IEnumerable<LoyaltyPointsBalance> GetPointsBalance()
+        {
+            List<LoyaltyPointsBalance> result = _context.Transactions.GroupBy(x => x.LoyaltyCardNumber).Select(x => new LoyaltyPointsBalance()
+            {
+                LoyaltyCardNumber = x.Key,
+                TotalPoints = x.Sum(s => s.LoyaltyPointsEarned),
+            }).ToList();
+            return result;
         }
     }
 }
