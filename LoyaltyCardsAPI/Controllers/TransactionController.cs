@@ -30,8 +30,15 @@ namespace LoyaltyCardsAPI.Controllers
                 return BadRequest("The amount of points was not specified or is equal to 0.");
             }
 
-            var transaction = await _transactionRepository.AddAsync(cardNumber, pointsEarned);
-            return Created("Create", transaction);
+            try
+            {
+                var transaction = await _transactionRepository.AddAsync(cardNumber, pointsEarned);
+                return Created("Create", transaction);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet("{cardNumber}")]
@@ -39,8 +46,15 @@ namespace LoyaltyCardsAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<LoyaltyPointsBalance> GetPointsBalance([FromRoute] int cardNumber)
         {
-            var result = _transactionRepository.GetPointsBalance(cardNumber);
-            return Ok(result);
+            try
+            {
+                var result = _transactionRepository.GetPointsBalance(cardNumber);
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

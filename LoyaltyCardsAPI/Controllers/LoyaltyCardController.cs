@@ -35,8 +35,15 @@ namespace LoyaltyCardsAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Issue(CreateLoyaltyCardDto loyaltyCardDto)
         {
-            var loyaltyCard = await _loyaltyCardRepository.AddAsync(loyaltyCardDto);
-            return Created("Issue", loyaltyCard);
+            try
+            {
+                var loyaltyCard = await _loyaltyCardRepository.AddAsync(loyaltyCardDto);
+                return Created("Issue", loyaltyCard);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
     }
 }
