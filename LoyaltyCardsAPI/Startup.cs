@@ -1,6 +1,7 @@
 using LoyaltyCardsAPI.Database;
 using LoyaltyCardsAPI.Repositories.Clients;
 using LoyaltyCardsAPI.Repositories.LoyaltyCards;
+using LoyaltyCardsAPI.Repositories.Transactions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,6 +42,7 @@ namespace LoyaltyCardsAPI
 
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ILoyaltyCardRepository, LoyaltyCardRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
