@@ -1,5 +1,7 @@
 ﻿using LoyaltyCardsAPI.Database;
+using LoyaltyCardsAPI.Dtos.LoyaltyCard;
 using LoyaltyCardsAPI.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +20,24 @@ namespace LoyaltyCardsAPI.Repositories.LoyaltyCards
         
         public IEnumerable<LoyaltyCard> GetAll()
         {
-            return _context.LoyaltyCards.AsEnumerable();
+            var loyaltyCards = _context.LoyaltyCards.Include(x => x.Client);
+            return loyaltyCards;
+        }
+
+        public async Task<LoyaltyCard> AddAsync(CreateLoyaltyCardDto loyaltyCardDto)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(x => x.Id == loyaltyCardDto.ClientId);
+            var loyaltyCard = new LoyaltyCard()
+            {
+                IssuingDate = DateTime.Now,
+                ValidUntil = loyaltyCardDto.ValidUntil,
+                ClientId = loyaltyCardDto.ClientId,
+                Client = client
+            };
+
+            await _context.LoyaltyCards.AddAsync(loyaltyCard);
+            await _context.SaveChangesAsync();
+            return loyaltyCard;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using LoyaltyCardsAPI.Database;
 using LoyaltyCardsAPI.Dtos.Client;
 using LoyaltyCardsAPI.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

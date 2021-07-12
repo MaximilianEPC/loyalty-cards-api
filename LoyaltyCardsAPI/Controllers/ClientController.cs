@@ -20,6 +20,8 @@ namespace LoyaltyCardsAPI.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Client>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<IEnumerable<Client>> GetAll()
         {
             return Ok(_clientRepository.GetAll());
@@ -28,6 +30,7 @@ namespace LoyaltyCardsAPI.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Client))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Create(CreateClientDto clientDto)
         {
             var client = await _clientRepository.AddAsync(clientDto);
