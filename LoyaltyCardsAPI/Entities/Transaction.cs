@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace LoyaltyCardsAPI.Entities
 {
@@ -10,9 +11,9 @@ namespace LoyaltyCardsAPI.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
+        [ForeignKey("LoyaltyCard")]
         public int LoyaltyCardNumber { get; set; }
-        [ForeignKey("LoyaltyCardNumber")]
+        [JsonIgnore]
         public virtual LoyaltyCard LoyaltyCard { get; set; }
 
         public int LoyaltyPointsEarned { get; set; }

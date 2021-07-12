@@ -4,7 +4,10 @@ using LoyaltyCardsAPI.Repositories.Transactions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace LoyaltyCardsAPI.Controllers
 {
@@ -55,6 +58,21 @@ namespace LoyaltyCardsAPI.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet]
+        public ActionResult GetTransactionHistory()
+        {
+            var transactions = _transactionRepository.GetAll();
+
+            XmlSerializer xmlSerializer = new XmlSerializer(transactions.GetType());
+            FileStream file = System.IO.File.Create("./transactions.xml");
+
+            xmlSerializer.Serialize(file, transactions);
+
+            file.Close();
+
+            return File(System.IO.File.ReadAllBytes("./transactions.xml"), "application/xml");
         }
     }
 }

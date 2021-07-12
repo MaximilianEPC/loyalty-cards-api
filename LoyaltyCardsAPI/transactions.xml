@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ArrayOfTransaction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Transaction>
+    <Id>1</Id>
+    <LoyaltyCardNumber>2</LoyaltyCardNumber>
+    <LoyaltyPointsEarned>5000</LoyaltyPointsEarned>
+    <TimeOfTransaction>2021-07-12T15:19:16.5251858</TimeOfTransaction>
+  </Transaction>
+  <Transaction>
+    <Id>2</Id>
+    <LoyaltyCardNumber>2</LoyaltyCardNumber>
+    <LoyaltyPointsEarned>3000</LoyaltyPointsEarned>
+    <TimeOfTransaction>2021-07-12T15:21:58.5075695</TimeOfTransaction>
+  </Transaction>
+  <Transaction>
+    <Id>3</Id>
+    <LoyaltyCardNumber>3</LoyaltyCardNumber>
+    <LoyaltyPointsEarned>1500</LoyaltyPointsEarned>
+    <TimeOfTransaction>2021-07-12T16:04:14.2962922</TimeOfTransaction>
+  </Transaction>
+  <Transaction>
+    <Id>4</Id>
+    <LoyaltyCardNumber>3</LoyaltyCardNumber>
+    <LoyaltyPointsEarned>4500</LoyaltyPointsEarned>
+    <TimeOfTransaction>2021-07-12T16:04:19.763602</TimeOfTransaction>
+  </Transaction>
+  <Transaction>
+    <Id>5</Id>
+    <LoyaltyCardNumber>3</LoyaltyCardNumber>
+    <LoyaltyPointsEarned>-2000</LoyaltyPointsEarned>
+    <TimeOfTransaction>2021-07-12T16:04:23.7566334</TimeOfTransaction>
+  </Transaction>
+</ArrayOfTransaction>

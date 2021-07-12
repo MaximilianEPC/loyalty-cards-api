@@ -43,5 +43,12 @@ namespace LoyaltyCardsAPI.Repositories.Transactions
             }).SingleOrDefault<LoyaltyPointsBalance>();
             return result;
         }
+
+        public IEnumerable<Transaction> GetAll()
+        {
+            //var transactions = _context.Transactions.Include(x => x.LoyaltyCard).OrderByDescending(x => x.TimeOfTransaction).ToList();
+            var transactions = _context.Transactions.AsEnumerable().ToList();
+            return transactions;
+        }
     }
 }

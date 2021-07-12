@@ -12,5 +12,7 @@ namespace LoyaltyCardsAPI.Repositories.Transactions
         Task<Transaction> AddAsync(int cardNumber, int pointsEarned);
 
         LoyaltyPointsBalance GetPointsBalance(int cardNumber);
+
+        IEnumerable<Transaction> GetAll();
     }
 }
