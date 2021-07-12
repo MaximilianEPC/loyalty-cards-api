@@ -1,4 +1,5 @@
 ﻿using LoyaltyCardsAPI.Database;
+using LoyaltyCardsAPI.Dtos.Client;
 using LoyaltyCardsAPI.Entities;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,23 @@ namespace LoyaltyCardsAPI.Repositories.Clients
         public IEnumerable<Client> GetAll()
         {
             return _context.Clients.AsEnumerable();
+        }
+
+        public async Task<Client> AddAsync(CreateClientDto clientDto)
+        {
+            var client = new Client()
+            {
+                Name = clientDto.Name,
+                Surname = clientDto.Surname,
+                Email = clientDto.Email,
+                PhoneNumber = clientDto.PhoneNumber,
+                Gender = clientDto.Gender,
+                RegistrationDate = DateTime.Now
+            };
+
+            await _context.Clients.AddAsync(client);
+            await _context.SaveChangesAsync();
+            return client;
         }
     }
 }
