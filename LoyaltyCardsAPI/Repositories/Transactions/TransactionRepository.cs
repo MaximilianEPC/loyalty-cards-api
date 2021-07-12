@@ -34,13 +34,13 @@ namespace LoyaltyCardsAPI.Repositories.Transactions
             return transaction;
         }
 
-        public IEnumerable<LoyaltyPointsBalance> GetPointsBalance()
+        public LoyaltyPointsBalance GetPointsBalance(int cardNumber)
         {
-            List<LoyaltyPointsBalance> result = _context.Transactions.GroupBy(x => x.LoyaltyCardNumber).Select(x => new LoyaltyPointsBalance()
+            LoyaltyPointsBalance result = _context.Transactions.Where(x => x.LoyaltyCardNumber == cardNumber).GroupBy(x => x.LoyaltyCardNumber).Select(x => new LoyaltyPointsBalance()
             {
                 LoyaltyCardNumber = x.Key,
                 TotalPoints = x.Sum(s => s.LoyaltyPointsEarned),
-            }).ToList();
+            }).SingleOrDefault<LoyaltyPointsBalance>();
             return result;
         }
     }

@@ -34,12 +34,12 @@ namespace LoyaltyCardsAPI.Controllers
             return Created("Create", transaction);
         }
 
-        [HttpGet]
+        [HttpGet("{cardNumber}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<LoyaltyPointsBalance>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<IEnumerable<LoyaltyPointsBalance>> GetPointsBalance()
+        public ActionResult<LoyaltyPointsBalance> GetPointsBalance([FromRoute] int cardNumber)
         {
-            var result = _transactionRepository.GetPointsBalance();
+            var result = _transactionRepository.GetPointsBalance(cardNumber);
             return Ok(result);
         }
     }
